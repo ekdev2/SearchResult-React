@@ -1,0 +1,273 @@
+@import url('https://mango.collegeboard.org/apricot/dev/3.3.0/css/apricot.min.css');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-250: #e5e5e5 !default;
+$gray-300: #dee2e6 !default;
+$gray-350: #d9d9d9 !default;
+$gray-400: #ced4da !default;
+$gray-450: #ccc !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-650: #888888 !default;
+$gray-700: #495057 !default;
+$gray-750: #505050 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+$black-100: #1e1e1e !default;
+$black-200: #333333 !default;
+$black-border: #4d4d4d !default;
+
+$grays: () !default;
+$grays: map-merge(
+  (
+    '100': $gray-100,
+    '200': $gray-200,
+    '250': $gray-250,
+    '300': $gray-300,
+    '350': $gray-300,
+    '400': $gray-400,
+    '450': $gray-450,
+    '500': $gray-500,
+    '600': $gray-600,
+    '700': $gray-700,
+    '750': $gray-750,
+    '800': $gray-800,
+    '900': $gray-900
+  ),
+  $grays
+);
+
+$blue: #2196f3;
+$blue-100: #0077c8;
+$blue-200: #0076c8;
+$red: #ef5350;
+$yellow: #ffc107;
+$login-yellow: #fbdb00;
+$green: #66bb6a;
+$cyan: #00bcd4;
+$purple: #702f8a;
+$dark: $gray-800 !default;
+$l_white: #fff;
+$gray-label: #888888;
+$light-blue-selection: #e6f0ff;
+
+$text-muted: $gray-600 !default;
+$primary: $blue;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light-gray: #f0f0f0;
+$body-color: $gray-900 !default;
+
+$text-font: 'Roboto slab';
+$text-roboto: 'Roboto';
+
+//Font Variables
+$font-100: 100;
+$font-700: 700;
+$font-400: 400;
+$font-roboto-slab: 'RobotoSlab';
+
+.search-results {
+  width: 100%;
+  height: 100%;
+  background-color: $light-gray;
+
+  .middle-layout {
+    background-color: $white;
+    height: 100%;
+
+    .form-control {
+      background-color: $white;
+    }
+
+    .icons {
+      float: right;
+    }
+
+    button {
+      margin-right: 0.875rem;
+    }
+  }
+
+  .left-layout {
+    height: 100%;
+
+    .icons {
+      margin-top: 0.25rem;
+    }
+
+    .collapse-icon {
+      float: right;
+      margin-right: 1.1875rem;
+      color: $gray-label;
+    }
+
+    button {
+      margin-right: 1.375rem;
+    }
+  }
+
+  .search-results-controls {
+    padding: 1.875rem 0 0 1.3125rem;
+  }
+
+  h2 {
+    color: $black;
+    margin-bottom: 0;
+    float: left;
+    font-family: $font-roboto-slab;
+    font-weight: $font-700;
+  }
+
+  .result-count {
+    font-style: italic;
+    color: $gray-label;
+    font-size: 0.75rem;
+    clear: left;
+  }
+
+  .action-text {
+    font-weight: $font-400;
+    margin-left: 0.35rem;
+    color: $black;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .filter-icon {
+    font-size: 0.85rem;
+    color: $black;
+  }
+
+  .replay-icon {
+    font-size: 0.9rem;
+    color: $black;
+  }
+
+  .cb-input-search i.cb-search {
+    color: $gray-label;
+    top: 1rem;
+    left: 0.75rem;
+  }
+
+  .input-container {
+    margin: 0.75rem 1.9rem 0 0;
+  }
+
+  .form-control,
+  .form-control:focus,
+  .form-control:hover {
+    z-index: 0;
+    outline: 0;
+    border: 0;
+    border-bottom: 1px solid $gray-label;
+    box-shadow: none;
+    font-size: 0.875rem;
+    width: 100%;
+  }
+
+  .items-container {
+    height: calc(100% - 12.5rem);
+    overflow: auto;
+    padding: 0;
+    margin-top: 1.438rem;
+  }
+
+  .item-container {
+    padding: 1.125rem 0 1.125rem 1.625rem;
+    border-bottom: 1px solid $gray-350;
+    list-style: none;
+  }
+
+  .item-container.selected {
+    background-color: $light-blue-selection;
+    border-left: 5px solid $blue-100;
+  }
+
+  .item-container.selected .main-item,
+  .item-container.selected .secondary-item,
+  .item-container.selected dt,
+  .item-container.selected dd {
+    color: $blue-100;
+    display: block;
+  }
+
+  .item-container .main-item,
+  .item-container .secondary-item,
+  .item-container dt,
+  .item-container dd {
+    color: $black-100;
+    display: block;
+  }
+
+  .main-item {
+    font-family: $font-roboto-slab;
+    font-weight: $font-700;
+  }
+
+  dt,
+  dd {
+    float: left;
+  }
+
+  dt {
+    clear: both;
+    margin: 0;
+    font-family: $text-roboto;
+    font-weight: $font-100;
+  }
+
+  dd {
+    margin-left: 0.5rem;
+  }
+
+  hr {
+    border: 0;
+    clear: left;
+    margin-bottom: 0;
+  }
+
+  .expand-icon {
+    display: none;
+  }
+
+  a.skip-link {
+    display: block;
+    left: -999px;
+    top: -999px;
+    position: absolute;
+  }
+
+  a.skip-link:focus {
+    position: relative;
+    left: 0;
+    top: 0;
+    border: 1px solid $blue-100;
+  }
+}
+
+.search-results.sr-collapse {
+  width: 3.875rem;
+  padding: 1.875rem 0 0 1.9375rem;
+
+  .expand-icon {
+    display: block;
+  }
+
+  .left-layout {
+    display: none;
+  }
+}
+
+
+
