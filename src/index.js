@@ -47,6 +47,7 @@ class SearchResults extends React.Component {
 
     console.log(this.itemsContainerRef.current.clientHeight);
     console.log(this.dataItemRef.current);
+    console.log(this.dataItemRef.current);
   }
 
   loadData() {
