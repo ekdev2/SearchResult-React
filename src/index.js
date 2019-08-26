@@ -6,26 +6,12 @@ import memoize from "memoize-one";
 import "./styles.scss";
 
 class SearchResults extends React.Component {
-  filter = memoize((list, filterText) => {
-    const textToMatch = filterText.toLowerCase();
-    const results = list.filter(dataItem => {
-      return Object.keys(dataItem)
-        .filter(f => f !== "id")
-        .some(field => {
-          return dataItem[field].data
-            ? dataItem[field].data.toLowerCase().startsWith(textToMatch)
-            : "";
-        });
-    });
-    return results;
-  });
-
   constructor(props) {
     super(props);
     const { data } = this.props;
     this.state = {
       closed: false,
-      searchValue: "",
+      searchValue: "nao",
       allData: [],
       currentData: data.length > 0 ? data.slice(0, 1) : []
     };
@@ -40,10 +26,7 @@ class SearchResults extends React.Component {
 
   componentDidMount() {
     const { data } = this.props;
-    this.setState(() => ({
-      allData: data.slice(this.initialAmountOfItemsToRender(), data.length),
-      currentData: data.slice(0, this.initialAmountOfItemsToRender())
-    }));
+    this.resetDataList(data, "");
   }
 
   initialAmountOfItemsToRender = () => {
@@ -60,6 +43,18 @@ class SearchResults extends React.Component {
     return items;
   };
 
+  resetDataList = (dataList, searchValue) => {
+    this.setState(() => ({
+      allData: dataList.slice(
+        this.initialAmountOfItemsToRender(),
+        dataList.length
+      ),
+      currentData: dataList.slice(0, this.initialAmountOfItemsToRender()),
+      test: "",
+      searchValue: searchValue
+    }));
+  };
+
   loadData() {
     const { allData, currentData } = this.state;
     this.setState(() => ({
@@ -67,6 +62,20 @@ class SearchResults extends React.Component {
       allData: allData.slice(3, allData.length)
     }));
   }
+
+  filter = (list, filterText) => {
+    const textToMatch = filterText.toLowerCase();
+    const results = list.filter(dataItem => {
+      return Object.keys(dataItem)
+        .filter(f => f !== "id")
+        .some(field => {
+          return dataItem[field].data
+            ? dataItem[field].data.toLowerCase().startsWith(textToMatch)
+            : "";
+        });
+    });
+    return results;
+  };
 
   handleExpandClick() {
     this.setState(() => ({
@@ -81,7 +90,10 @@ class SearchResults extends React.Component {
   }
 
   handleSearchChange(event) {
-    this.setState({ searchValue: event.target.value });
+    const { data } = this.props;
+    const searchValue = event.target.value;
+    const filteredList = this.filter(data, searchValue);
+    this.resetDataList(filteredList, searchValue);
   }
 
   handleScroll(event) {
@@ -104,7 +116,7 @@ class SearchResults extends React.Component {
       data
     } = this.props;
     const { closed, searchValue, currentData } = this.state;
-    const filteredList = this.filter(currentData, searchValue);
+
     // TODO: make this dynamic based on user selection
     let selected = "selected"; // temporary - will make this dynamic based on selected item
     let leftIcons;
@@ -195,6 +207,7 @@ class SearchResults extends React.Component {
             <div className="cb-input-search input-container">
               <input
                 type="text"
+                value={searchValue}
                 className="form-control"
                 placeholder={searchBoxLabel}
                 aria-label={searchBoxLabel}
@@ -209,7 +222,7 @@ class SearchResults extends React.Component {
             ref={this.itemsContainerRef}
             onScroll={this.handleScroll}
           >
-            {filteredList.map(dataItem => {
+            {currentData.map(dataItem => {
               const fieldsWithoutLabels = Object.keys(dataItem).filter(
                 field => dataItem[field].includeLabel === false
               );
