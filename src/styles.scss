@@ -187,6 +187,8 @@ $font-roboto-slab: 'RobotoSlab';
     padding: 1.125rem 0 1.125rem 1.625rem;
     border-bottom: 1px solid $gray-350;
     list-style: none;
+    float: left;
+    width: 100%;
   }
 
   .item-container.selected {

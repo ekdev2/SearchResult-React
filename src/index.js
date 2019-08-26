@@ -41,14 +41,24 @@ class SearchResults extends React.Component {
   componentDidMount() {
     const { data } = this.props;
     this.setState(() => ({
-      allData: data.slice(3, data.length),
-      currentData: data.slice(0, 3)
+      allData: data.slice(this.initialAmountOfItemsToRender(), data.length),
+      currentData: data.slice(0, this.initialAmountOfItemsToRender())
     }));
-
-    console.log(this.itemsContainerRef.current.clientHeight);
-    console.log(this.dataItemRef.current);
-    console.log(this.dataItemRef.current);
   }
+
+  initialAmountOfItemsToRender = () => {
+    const containerHeight = this.itemsContainerRef.current.clientHeight;
+    const itemHeight = this.dataItemRef.current
+      ? this.dataItemRef.current.clientHeight
+      : 0;
+    let items = 1;
+
+    if (itemHeight > 0 && containerHeight > itemHeight) {
+      items = Math.ceil(containerHeight / itemHeight) + 1;
+    }
+
+    return items;
+  };
 
   loadData() {
     const { allData, currentData } = this.state;
@@ -312,7 +322,7 @@ SearchResults.propTypes = {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <div style={{ width: "350px", height: "450px", margin: "20px 0 0 20px" }}>
+  <div style={{ width: "350px", height: "550px", margin: "20px 0 0 20px" }}>
     <SearchResults
       title="Search Results"
       jumpLinks={[{ url: "#main", text: "skip link" }]}
@@ -344,6 +354,174 @@ ReactDOM.render(
             includeLabel: true,
             boldFont: false,
             label: "School ID #"
+          }
+        },
+        {
+          id: "3",
+          name: {
+            data: "Justine Marshall",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "426-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "4",
+          name: {
+            data: "Yogarasa Gandhi",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "5",
+          name: {
+            data: "John Brown",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            label: "School ID #",
+            includeLabel: true,
+            boldFont: false
+          }
+        },
+        {
+          id: "6",
+          name: {
+            data: "Jason Redd",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "7",
+          name: {
+            data: "Dan Rosen",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "8",
+          name: {
+            data: "Dan Rosen2",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "9",
+          name: {
+            data: "Dan Rosen3",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "10",
+          name: {
+            data: "Dan Rosen4",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "11",
+          name: {
+            data: "Dan Rosen5",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "12",
+          name: {
+            data: "Dan Rosen76",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "13",
+          name: {
+            data: "Dan Rosen8",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
+          }
+        },
+        {
+          id: "14",
+          name: {
+            data: "Dan Rosen9",
+            includeLabel: false,
+            boldFont: true
+          },
+          "School ID #": {
+            data: "776-41-2391",
+            includeLabel: true,
+            label: "School ID #",
+            boldFont: false
           }
         }
       ]}
