@@ -11,8 +11,9 @@ class SearchResults extends React.Component {
     const { data } = this.props;
     this.state = {
       closed: false,
-      searchValue: "nao",
+      searchValue: "",
       allData: [],
+      initialAmountOfItemsToRender: 0,
       currentData: data.length > 0 ? data.slice(0, 1) : []
     };
     this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -26,7 +27,7 @@ class SearchResults extends React.Component {
 
   componentDidMount() {
     const { data } = this.props;
-    this.resetDataList(data, "");
+    this.resetDataList(data, "", true);
   }
 
   initialAmountOfItemsToRender = () => {
@@ -43,15 +44,19 @@ class SearchResults extends React.Component {
     return items;
   };
 
-  resetDataList = (dataList, searchValue) => {
+  resetDataList = (dataList, searchValue, initialLoad) => {
+    const { initialAmountOfItemsToRender } = this.state;
+    const amountOfItemsToRender = initialLoad
+      ? this.initialAmountOfItemsToRender()
+      : initialAmountOfItemsToRender;
     this.setState(() => ({
-      allData: dataList.slice(
-        this.initialAmountOfItemsToRender(),
-        dataList.length
-      ),
-      currentData: dataList.slice(0, this.initialAmountOfItemsToRender()),
+      allData: dataList.slice(amountOfItemsToRender, dataList.length),
+      currentData: dataList.slice(0, amountOfItemsToRender),
       test: "",
-      searchValue: searchValue
+      searchValue: searchValue,
+      initialAmountOfItemsToRender: initialLoad
+        ? amountOfItemsToRender
+        : initialAmountOfItemsToRender
     }));
   };
 
