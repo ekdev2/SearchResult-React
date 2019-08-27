@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import memoize from "memoize-one";
 
 import "./styles.scss";
 
@@ -13,7 +12,7 @@ class SearchResults extends React.Component {
       closed: false,
       searchValue: "",
       allData: [],
-      initialAmountOfItemsToRender: 0,
+      amountOfItemsToRender: 0,
       currentData: data.length > 0 ? data.slice(0, 1) : []
     };
     this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -45,18 +44,15 @@ class SearchResults extends React.Component {
   };
 
   resetDataList = (dataList, searchValue, initialLoad) => {
-    const { initialAmountOfItemsToRender } = this.state;
-    const amountOfItemsToRender = initialLoad
+    const { amountOfItemsToRender } = this.state;
+    const computedAmountOfItemsToRender = initialLoad
       ? this.initialAmountOfItemsToRender()
-      : initialAmountOfItemsToRender;
+      : amountOfItemsToRender;
     this.setState(() => ({
-      allData: dataList.slice(amountOfItemsToRender, dataList.length),
-      currentData: dataList.slice(0, amountOfItemsToRender),
-      test: "",
+      allData: dataList.slice(computedAmountOfItemsToRender, dataList.length),
+      currentData: dataList.slice(0, computedAmountOfItemsToRender),
       searchValue: searchValue,
-      initialAmountOfItemsToRender: initialLoad
-        ? amountOfItemsToRender
-        : initialAmountOfItemsToRender
+      amountOfItemsToRender: computedAmountOfItemsToRender
     }));
   };
 
